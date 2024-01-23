@@ -5,8 +5,8 @@
 /** @var \frontend\models\SignupForm $model */
 
 use common\models\Jabatan;
-use yii\bootstrap5\Html;
-use yii\bootstrap5\ActiveForm;
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 

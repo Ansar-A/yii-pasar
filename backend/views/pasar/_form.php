@@ -120,8 +120,8 @@ use yii\widgets\ActiveForm;
                             <?= $form->field($model, 'kondisi_pasar')->dropDownList(['baik' => 'Baik', 'rusak_sedang' => 'Rusak sedang', 'rusak_ringan' => 'Rusak ringan', 'rusak_berat' => 'Rusak berat',], ['prompt' => 'Pilih Kondisi']) ?>
                         </div>
 
-                        <div class="col-sm-4"><?= $form->field($model, 'jml_dasaran_kios')->textInput() ?></div>
-                        <div class="col-sm-4"><?= $form->field($model, 'jml_dasaran_los')->textInput() ?></div>
+                        <div class="col-sm-4"><?= $form->field($model, 'jml_dasaran_kios')->textInput(['type' => 'number']) ?></div>
+                        <div class="col-sm-4"><?= $form->field($model, 'jml_dasaran_los')->textInput(['type' => 'number']) ?></div>
                         <div class="col-sm-4"><?= $form->field($model, 'kondisi_dasaran_kios')->dropDownList(['baik' => 'Baik', 'kurang_baik' => 'Kurang baik',], ['prompt' => 'Pilih Kondisi']) ?></div>
 
                         <div class="col-sm-4">

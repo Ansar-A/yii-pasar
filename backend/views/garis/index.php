@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="#!">Bootstrap Table</a></li>
+                        <li class="breadcrumb-item"><a href="<?= Url::to(['site/home']) ?>">Home</a></li>
                         <li class="breadcrumb-item"><a href="#!">Basic Tables</a></li>
                     </ul>
                 </div>
