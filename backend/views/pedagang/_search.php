@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'keterangan') ?>
 
-    <?php // echo $form->field($model, 'photo') ?>
+    
 
     <?php // echo $form->field($model, 'get_pasar') ?>
 

@@ -1,10 +1,12 @@
 <?php
 
 use common\models\User;
+use kartik\editable\Editable;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
-use yii\grid\GridView;
+use kartik\grid\GridView;
+use yii\grid\GridView as GridGridView;
 
 /** @var yii\web\View $this */
 /** @var backend\models\UserSearch $searchModel */
@@ -74,7 +76,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             'email:email',
                             'alamat',
                             'level',
-                            'status',
+                            // 'status',
+
                             //'created_at',
                             //'updated_at',
                             //'verification_token',

@@ -9,8 +9,6 @@ use yii\widgets\ActiveForm;
 /** @var common\models\Pedagang $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
-
-
 <div class="pcoded-content">
 
     <!-- [ breadcrumb ] start -->
@@ -50,12 +48,12 @@ use yii\widgets\ActiveForm;
                         <div class="col-sm-6"><?= $form->field($model, 'jenis_jualan')->textInput(['maxlength' => true]) ?></div>
                         <div class="col-sm-6"><?= $form->field($model, 'omset_perbulan')->textInput() ?></div>
                         <div class="col-sm-6"><?= $form->field($model, 'keterangan')->textInput(['maxlength' => true]) ?></div>
-                        <div class="col-sm-6"><?= $form->field($model, 'photo')->fileInput() ?></div>
+                        
                         <div class="col-sm-6"><?= $form->field($model, 'alamat')->textarea(['maxlength' => true]) ?></div>
                         <div class="col-sm-6">
                             <?= $form->field($model, 'get_pasar')->dropDownList(
                                 ArrayHelper::map(
-                                    $data = Pasar::find()->all(),
+                                    $data = Pasar::find()->where(['get_pengelola' => Yii::$app->user->identity->id])->all(),
                                     'id_pasar',
                                     'nama_pasar'
                                 ),

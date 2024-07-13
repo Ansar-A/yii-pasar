@@ -55,9 +55,9 @@ class Pasar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_pasar', 'alamat', 'get_pengelola', 'no_telp', 'thn_pembangunan', 'thn_renovasi', 'garis_bujur', 'garis_lintang', 'kondisi_pasar', 'jml_dasaran_kios', 'jml_dasaran_los', 'kondisi_dasaran_kios', 'kondisi_dasaran_los', 'kapasitas_bangunan', 'luas_lahan', 'kepemilikan_lahan', 'unit_kerja_pengelola', 'legalitas_lahan', 'jumlah_pedagang', 'jumlah_pengunjung', 'omset_perbulan', 'keterangan', 'photo_depan', 'photo_belakang', 'photo_kiri', 'photo_kanan', 'photo_dalam'], 'required'],
+            [['nama_pasar', 'alamat', 'get_pengelola', 'no_telp', 'thn_pembangunan', 'thn_renovasi', 'garis_bujur', 'garis_lintang', 'kondisi_pasar', 'jml_dasaran_kios', 'jml_dasaran_los', 'kondisi_dasaran_kios', 'kondisi_dasaran_los', 'kapasitas_bangunan', 'luas_lahan', 'kepemilikan_lahan', 'unit_kerja_pengelola', 'legalitas_lahan', 'jumlah_pedagang', 'jumlah_pengunjung', 'omset_perbulan', 'keterangan', 'photo_depan',  'photo_dalam'], 'required'],
             [['get_pengelola', 'jml_dasaran_kios', 'jml_dasaran_los', 'kapasitas_bangunan',  'jumlah_pedagang', 'jumlah_pengunjung', 'garis_bujur', 'garis_lintang'], 'integer'],
-            [['thn_pembangunan', 'thn_renovasi', 'photo_depan', 'photo_belakang', 'photo_kiri', 'photo_kanan', 'photo_dalam', 'sertifikasi'], 'safe'],
+            [['thn_pembangunan', 'thn_renovasi', 'photo_depan', 'photo_dalam'], 'safe'],
             [['kondisi_pasar', 'kondisi_dasaran_kios', 'kondisi_dasaran_los', 'kepemilikan_lahan', 'unit_kerja_pengelola', 'legalitas_lahan'], 'string'],
             [['omset_perbulan'], 'number'],
             [['nama_pasar'], 'string', 'max' => 100],
@@ -65,11 +65,9 @@ class Pasar extends \yii\db\ActiveRecord
             [['no_telp', 'luas_lahan'], 'string', 'max' => 50],
 
             [['photo_depan'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
-            [['photo_belakang'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
-            [['photo_kiri'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
-            [['photo_kanan'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
+          
             [['photo_dalam'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
-            [['sertifikasi'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 50 * 1024 * 1024, 'on' => 'update'],
+            // [['sertifikasi'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 50 * 1024 * 1024, 'on' => 'update'],
 
             [['garis_bujur'], 'exist', 'skipOnError' => true, 'targetClass' => Garis::class, 'targetAttribute' => ['garis_bujur' => 'id_garis']],
             [['garis_lintang'], 'exist', 'skipOnError' => true, 'targetClass' => Garis::class, 'targetAttribute' => ['garis_lintang' => 'id_garis']],
@@ -106,11 +104,9 @@ class Pasar extends \yii\db\ActiveRecord
             'omset_perbulan' => 'Omset Perbulan',
             'keterangan' => 'Keterangan',
             'photo_depan' => 'Photo Depan',
-            'photo_belakang' => 'Photo Belakang',
-            'photo_kiri' => 'Photo Kiri',
-            'photo_kanan' => 'Photo Kanan',
+            
             'photo_dalam' => 'Photo Dalam',
-            'sertifikasi' => 'Sertifikasi',
+           
         ];
     }
 
@@ -132,8 +128,8 @@ class Pasar extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Pedagang::class, ['get_pasar' => 'id_pasar']);
     }
-    public function getGarisX()
+    public function getGariss()
     {
-        return $this->hasOne(User::class, ['id_garis' => 'garis_bujur', 'id_garis' => 'garis_lintang',]);
+        return $this->hasOne(Garis::class, ['id_garis' => 'garis_bujur', 'id_garis' => 'garis_lintang',]);
     }
 }

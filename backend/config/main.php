@@ -37,7 +37,10 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest'],
+        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -52,7 +55,6 @@ return [
                     'baseUrl' => '@web',
                     'js' => [
                         "ablepro/dist/assets/js/vendor-all.min.js",
-
                     ]
                 ],
                 'yii\bootstrap\BootstrapAsset' => [

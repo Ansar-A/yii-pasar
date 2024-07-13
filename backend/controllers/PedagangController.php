@@ -71,20 +71,9 @@ class PedagangController extends Controller
     {
         $model = new Pedagang();
 
-        $model->scenario = 'update';
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                $model->photo = UploadedFile::getInstance($model, 'photo');
-                if ($model->validate()) {
-                    if (!is_null($model->photo)) {
-                        $filename = 'photosPedagang/' . md5(microtime()) . '.' . $model->photo->extension;
-                        $model->photo->saveAs($filename);
-                        $model->photo = $filename;
-                        Yii::$app->getSession()->setFlash('success', '');
-                    }
-                    $model->save(false);
-                    return $this->redirect(['view', 'id_pedagang' => $model->id_pedagang]);
-                }
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id_pedagang' => $model->id_pedagang]);
             }
         } else {
             $model->loadDefaultValues();

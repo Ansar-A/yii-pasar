@@ -34,8 +34,6 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
     </div>
-    <!-- [ breadcrumb ] end -->
-    <!-- [ Main Content ] start -->
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -152,22 +150,12 @@ use yii\widgets\ActiveForm;
                         <hr>
                     </p>
                     <div class="row">
-                        <div class="col-sm-4">
-                            <?= $form->field($model, 'sertifikasi')->fileInput()->label('File Sertifikasi') ?>
-                        </div>
+
                         <div class="col-sm-4">
                             <?= $form->field($model, 'photo_depan')->fileInput()->label('Photo Pasar (Depan)') ?>
 
                         </div>
-                        <div class="col-sm-4">
-                            <?= $form->field($model, 'photo_belakang')->fileInput()->label('Photo Pasar (Belakang)') ?>
-                        </div>
-                        <div class="col-sm-4">
-                            <?= $form->field($model, 'photo_kanan')->fileInput()->label('Photo Pasar (Kanan)') ?>
-                        </div>
-                        <div class="col-sm-4">
-                            <?= $form->field($model, 'photo_kiri')->fileInput()->label('Photo Pasar (Kiri)') ?>
-                        </div>
+
                         <div class="col-sm-4">
                             <?= $form->field($model, 'photo_dalam')->fileInput()->label('Photo Pasar (Dalam)') ?>
                         </div>

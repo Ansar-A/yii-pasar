@@ -5,6 +5,7 @@ namespace backend\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Pasar;
+use Yii;
 
 /**
  * PasarSearch represents the model behind the search form of `common\models\Pasar`.
@@ -18,7 +19,7 @@ class PasarSearch extends Pasar
     {
         return [
             [['id_pasar', 'get_pengelola', 'jml_dasaran_kios', 'jml_dasaran_los', 'kapasitas_bangunan', 'kepemilikan_lahan', 'unit_kerja_pengelola', 'legalitas_lahan', 'jumlah_pedagang', 'jumlah_pengunjung'], 'integer'],
-            [['nama_pasar', 'alamat', 'no_telp', 'thn_pembangunan', 'thn_renovasi', 'garis_bujur', 'garis_lintang', 'kondisi_pasar', 'kondisi_dasaran_kios', 'kondisi_dasaran_los', 'luas_lahan', 'keterangan', 'photo_depan', 'photo_belakang', 'photo_kiri', 'photo_kanan', 'photo_dalam', 'sertifikasi'], 'safe'],
+            [['nama_pasar', 'alamat', 'no_telp', 'thn_pembangunan', 'thn_renovasi', 'garis_bujur', 'garis_lintang', 'kondisi_pasar', 'kondisi_dasaran_kios', 'kondisi_dasaran_los', 'luas_lahan', 'keterangan', 'photo_depan', 'photo_dalam', ], 'safe'],
             [['omset_perbulan'], 'number'],
         ];
     }
@@ -41,7 +42,14 @@ class PasarSearch extends Pasar
      */
     public function search($params)
     {
-        $query = Pasar::find();
+        if (\Yii::$app->user->can('Admin')) {
+            $query = Pasar::find();
+        } elseif (\Yii::$app->user->can('SuperAdmin')) {
+            $query = Pasar::find();
+        } else {
+            $query = Pasar::find()->where(['get_pengelola' => Yii::$app->user->identity->id]);
+        }
+
 
         // add conditions that should always apply here
 
@@ -72,7 +80,7 @@ class PasarSearch extends Pasar
             'jumlah_pedagang' => $this->jumlah_pedagang,
             'jumlah_pengunjung' => $this->jumlah_pengunjung,
             'omset_perbulan' => $this->omset_perbulan,
-            'sertifikasi' => $this->sertifikasi,
+           
         ]);
 
         $query->andFilterWhere(['like', 'nama_pasar', $this->nama_pasar])
@@ -86,10 +94,7 @@ class PasarSearch extends Pasar
             ->andFilterWhere(['like', 'luas_lahan', $this->luas_lahan])
             ->andFilterWhere(['like', 'keterangan', $this->keterangan])
             ->andFilterWhere(['like', 'photo_depan', $this->photo_depan])
-            ->andFilterWhere(['like', 'photo_belakang', $this->photo_belakang])
-            ->andFilterWhere(['like', 'photo_kiri', $this->photo_kiri])
-            ->andFilterWhere(['like', 'photo_kanan', $this->photo_kanan])
-            ->andFilterWhere(['like', 'sertifikasi', $this->sertifikasi])
+           
             ->andFilterWhere(['like', 'photo_dalam', $this->photo_dalam]);
 
         return $dataProvider;

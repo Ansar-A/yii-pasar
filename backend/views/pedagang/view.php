@@ -37,28 +37,31 @@ $this->params['breadcrumbs'][] = $this->title;
                     <span class="d-block m-t-5">use class <code>table</code> inside table element</span>
                 </div>
                 <div class="card-body table-border-style">
-                    <p>
-                        <?= Html::a('Update', ['update', 'id_pedagang' => $model->id_pedagang], ['class' => 'btn btn-primary']) ?>
-                        <?= Html::a('Delete', ['delete', 'id_pedagang' => $model->id_pedagang], [
-                            'class' => 'btn btn-danger',
-                            'data' => [
-                                'confirm' => 'Are you sure you want to delete this item?',
-                                'method' => 'post',
-                            ],
-                        ]) ?>
-                    </p>
+                    <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                        <p>
+                            <?= Html::a('Update', ['update', 'id_pedagang' => $model->id_pedagang], ['class' => 'btn btn-primary']) ?>
+                            <?= Html::a('Delete', ['delete', 'id_pedagang' => $model->id_pedagang], [
+                                'class' => 'btn btn-danger',
+                                'data' => [
+                                    'confirm' => 'Are you sure you want to delete this item?',
+                                    'method' => 'post',
+                                ],
+                            ]) ?>
+                        </p>
+                    <?php else : ?>
+                    <?php endif ?>
 
                     <?= DetailView::widget([
                         'model' => $model,
                         'attributes' => [
-                            'id_pedagang',
-                            [
-                                'label' => 'Photo',
-                                'format' => 'raw',
-                                'value' => function ($model) {
-                                    return Html::img('@web/' . $model->photo, ['style' => 'width:150px;', 'class' => 'img-responsive img-rounded']);
-                                }
-                            ],
+                            // 'id_pedagang',
+                            // [
+                            //     'label' => 'Photo',
+                            //     'format' => 'raw',
+                            //     'value' => function ($model) {
+                            //         return Html::img('@web/' . $model->photo, ['style' => 'width:150px;', 'class' => 'img-responsive img-rounded']);
+                            //     }
+                            // ],
                             'nama_pedangang',
                             'nik',
                             'alamat',

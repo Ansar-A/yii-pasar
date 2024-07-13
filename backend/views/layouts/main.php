@@ -36,51 +36,135 @@ AppAsset::register($this);
         <div class="navbar-wrapper">
             <div class="navbar-content scroll-div ps">
                 <ul class="nav pcoded-inner-navbar">
-                    <li class="nav-item pcoded-menu-caption">
-                        <label>Navigation</label>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= Url::to(['site/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home</span></a>
-                    </li>
-                    <li class="nav-item pcoded-hasmenu">
-                        <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Data Pasar</span></a>
-                        <ul class="pcoded-submenu">
-                            <li><a href="<?= Url::to(['pasar/index']) ?>">Pasar</a></li>
-                            <li><a href="<?= Url::to(['garis/index']) ?>">Garis Lintang & Bujur</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item pcoded-menu-caption">
-                        <label>UI Element</label>
-                    </li>
-                    <li class="nav-item pcoded-hasmenu">
-                        <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Data Pedagang</span></a>
-                        <ul class="pcoded-submenu">
-                            <li><a href="<?= Url::to(['pedagang/index']) ?>">Pedagang</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item pcoded-menu-caption">
-                        <label>Fungsional</label>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= Url::to(['jabatan/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Jabatan</span></a>
-                    </li>
+                    <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>DashBoard</label>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= Url::to(['site/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home</span></a>
+                        </li>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>Data</label>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Data Pasar</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="<?= Url::to(['pasar/index']) ?>">Pasar</a></li>
+                                <li><a href="<?= Url::to(['garis/index']) ?>">Garis Lintang & Bujur</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Data Pedagang</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="<?= Url::to(['pedagang/index']) ?>">Pedagang</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-item pcoded-menu-caption">
+                            <label>Fungsional</label>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a href="<?= Url::to(['jabatan/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Jabatan</span></a>
+                        </li> -->
 
-                    <li class="nav-item pcoded-menu-caption">
-                        <label>Data Instansi</label>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?= Url::to(['instansi/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Instansi</span></a>
-                    </li>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>Data Instansi</label>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= Url::to(['instansi/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Instansi</span></a>
+                        </li>
 
-                    <li class="nav-item pcoded-menu-caption">
-                        <label>Data User</label>
-                    </li>
-                    <li class="nav-item pcoded-hasmenu">
-                        <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Data Admin</span></a>
-                        <ul class="pcoded-submenu">
-                            <li><a href="<?= Url::to(['user/index']) ?>">Admin</a></li>
-                        </ul>
-                    </li>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>Data User</label>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Data Admin</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="<?= Url::to(['user/index']) ?>">User</a></li>
+                                <li><a href="<?= Url::to(['auth-assignment/index']) ?>">Akses</a></li>
+                                <!-- <li><a href="<?= Url::to(['auth-item/index']) ?>">Auth Item</a></li>
+                                <li><a href="<?= Url::to(['auth-item-child/index']) ?>">Auth Item Child</a></li> -->
+                            </ul>
+                        </li>
+                    <?php elseif (\Yii::$app->user->can('Admin')) : ?>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>DashBoard</label>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= Url::to(['site/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home</span></a>
+                        </li>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>Data</label>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Data Pasar</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="<?= Url::to(['pasar/index']) ?>">Pasar</a></li>
+                                <li><a href="<?= Url::to(['garis/index']) ?>">Garis Lintang & Bujur</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Data Pedagang</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="<?= Url::to(['pedagang/index']) ?>">Pedagang</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-item pcoded-menu-caption">
+                            <label>Fungsional</label>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a href="<?= Url::to(['jabatan/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Jabatan</span></a>
+                        </li> -->
+
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>Data Instansi</label>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= Url::to(['instansi/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Instansi</span></a>
+                        </li>
+
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>Data User</label>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Data Admin</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="<?= Url::to(['user/index']) ?>">User</a></li>
+                            </ul>
+                        </li>
+                    <?php else : ?>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>DashBoard</label>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= Url::to(['site/index']) ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Home</span></a>
+                        </li>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>Data</label>
+                        </li>
+
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Data Pedagang</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="<?= Url::to(['pedagang/index']) ?>">Pedagang</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Data Pasar</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="<?= Url::to(['pasar/index']) ?>">Pasar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item pcoded-menu-caption">
+                            <label>Data User</label>
+                        </li>
+                        <li class="nav-item pcoded-hasmenu">
+                            <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Data Admin</span></a>
+                            <ul class="pcoded-submenu">
+                                <li><a href="<?= Url::to(['user/index']) ?>">User</a></li>
+                            </ul>
+                        </li>
+                    <?php endif ?>
+
 
                 </ul>
             </div>
@@ -179,6 +263,9 @@ AppAsset::register($this);
                         </div>
                     </div>
                 </li> -->
+                <li>
+                    <p><?= Url::to(Yii::$app->user->identity->username) ?> [ <?= Url::to(Yii::$app->user->identity->level) ?> ]</p>
+                </li>
                 <li>
                     <div class="dropdown drp-user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

@@ -75,29 +75,26 @@ class PasarController extends Controller
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->photo_depan = UploadedFile::getInstance($model, 'photo_depan');
-                $model->photo_belakang = UploadedFile::getInstance($model, 'photo_belakang');
-                $model->photo_kiri = UploadedFile::getInstance($model, 'photo_kiri');
-                $model->photo_kanan = UploadedFile::getInstance($model, 'photo_kanan');
+               
                 $model->photo_dalam = UploadedFile::getInstance($model, 'photo_dalam');
-                if ($model->validate()) {
-                    if (!is_null($model->photo_depan && $model->photo_belakang && $model->photo_kiri && $model->photo_kanan && $model->photo_dalam)) {
-                        $filenameDepan = 'photosDepan/' . md5(microtime()) . '.' . $model->photo_depan->extension;
-                        $filenameBelakang = 'photosBelakang/' . md5(microtime()) . '.' . $model->photo_belakang->extension;
-                        $filenameKiri = 'photosKiri/' . md5(microtime()) . '.' . $model->photo_kiri->extension;
-                        $filenameKanan = 'photosKanan/' . md5(microtime()) . '.' . $model->photo_kanan->extension;
-                        $filenameDalam = 'photosDalam/' . md5(microtime()) . '.' . $model->photo_dalam->extension;
-                        $model->photo_depan->saveAs($filenameDepan);
-                        $model->photo_belakang->saveAs($filenameBelakang);
-                        $model->photo_kiri->saveAs($filenameKiri);
-                        $model->photo_kanan->saveAs($filenameKanan);
-                        $model->photo_dalam->saveAs($filenameDalam);
-                        $model->photo_depan = $filenameDepan;
-                        $model->photo_belakang = $filenameBelakang;
-                        $model->photo_kiri = $filenameKiri;
-                        $model->photo_kanan = $filenameKanan;
-                        $model->photo_dalam = $filenameDalam;
-                        Yii::$app->getSession()->setFlash('success', '');
-                    }
+              
+
+                if ($model->photo_depan != null  && $model->photo_dalam != null  && $model->validate()) {
+                   
+                    $filenameDepan = 'photosDepan/' . md5(microtime()) . '.' . $model->photo_depan->extension;
+                 
+                    $filenameDalam = 'photosDalam/' . md5(microtime()) . '.' . $model->photo_dalam->extension;
+
+                   
+                    $model->photo_depan->saveAs($filenameDepan);
+                   
+                    $model->photo_dalam->saveAs($filenameDalam);
+
+                   
+                    $model->photo_depan = $filenameDepan;
+                   
+                    $model->photo_dalam = $filenameDalam;
+                    Yii::$app->getSession()->setFlash('success', 'File berhasil diunggah.');
                     $model->save(false);
                     return $this->redirect(['view', 'id_pasar' => $model->id_pasar]);
                 }
@@ -125,71 +122,29 @@ class PasarController extends Controller
 
         if ($model->load($this->request->post())) {
             $model->photo_depan = UploadedFile::getInstance($model, 'photo_depan');
-            $model->photo_belakang = UploadedFile::getInstance($model, 'photo_belakang');
-            $model->photo_kiri = UploadedFile::getInstance($model, 'photo_kiri');
-            $model->photo_kanan = UploadedFile::getInstance($model, 'photo_kanan');
+        
             $model->photo_dalam = UploadedFile::getInstance($model, 'photo_dalam');
-            $model->sertifikasi = UploadedFile::getInstance($model, 'sertifikasi');
+           
             if ($model->validate()) {
                 if (!is_null($model->photo_depan && $model->photo_belakang && $model->photo_kiri && $model->photo_kanan && $model->photo_dalam && $model->sertifikasi)) {
                     $filenameDepan = 'photosDepan/' . md5(microtime()) . '.' . $model->photo_depan->extension;
-                    $filenameBelakang = 'photosBelakang/' . md5(microtime()) . '.' . $model->photo_belakang->extension;
-                    $filenameKiri = 'photosKiri/' . md5(microtime()) . '.' . $model->photo_kiri->extension;
-                    $filenameKanan = 'photosKanan/' . md5(microtime()) . '.' . $model->photo_kanan->extension;
+                 
                     $filenameDalam = 'photosDalam/' . md5(microtime()) . '.' . $model->photo_dalam->extension;
-                    $filenameSertifikat = 'Sertifikat/' . md5(microtime()) . '.' . $model->sertifikasi->extension;
+                   
                     $model->photo_depan->saveAs($filenameDepan);
-                    $model->photo_belakang->saveAs($filenameBelakang);
-                    $model->photo_kiri->saveAs($filenameKiri);
-                    $model->photo_kanan->saveAs($filenameKanan);
+                   
                     $model->photo_dalam->saveAs($filenameDalam);
-                    $model->sertifikasi->saveAs($filenameSertifikat);
+                
                     $model->photo_depan = $filenameDepan;
-                    $model->photo_belakang = $filenameBelakang;
-                    $model->photo_kiri = $filenameKiri;
-                    $model->photo_kanan = $filenameKanan;
+                 
                     $model->photo_dalam = $filenameDalam;
-                    $model->sertifikasi = $filenameSertifikat;
+                    
                 }
                 $model->save(false);
                 return $this->redirect(['view', 'id_pasar' => $model->id_pasar]);
             }
         }
-        // if ($model->load($this->request->post())) {
-        //     $model->photo_depan = UploadedFile::getInstance($model, 'photo_depan');
-        //     $model->photo_belakang = UploadedFile::getInstance($model, 'photo_belakang');
-        //     $model->photo_kiri = UploadedFile::getInstance($model, 'photo_kiri');
-        //     $model->photo_kanan = UploadedFile::getInstance($model, 'photo_kanan');
-        //     $model->photo_dalam = UploadedFile::getInstance($model, 'photo_dalam');
-
-        //     if ($model->validate()) {
-        //         if ($model->photo_depan !== null && $model->photo_belakang !== null && $model->photo_kiri !== null && $model->photo_kanan !== null && $model->photo_dalam !== null) {
-        //             $basePath = '@web/photosPasar/';  // Sesuaikan dengan path yang sesuai
-
-        //             $filenameDepan = 'photosDepan/' . md5(microtime()) . '.' . $model->photo_depan->extension;
-        //             $filenameBelakang = 'photosBelakang/' . md5(microtime()) . '.' . $model->photo_belakang->extension;
-        //             $filenameKiri = 'photosKiri/' . md5(microtime()) . '.' . $model->photo_kiri->extension;
-        //             $filenameKanan = 'photosKanan/' . md5(microtime()) . '.' . $model->photo_kanan->extension;
-        //             $filenameDalam = 'photosDalam/' . md5(microtime()) . '.' . $model->photo_dalam->extension;
-
-        //             $model->photo_depan->saveAs($basePath . $filenameDepan);
-        //             $model->photo_belakang->saveAs($basePath . $filenameBelakang);
-        //             $model->photo_kiri->saveAs($basePath . $filenameKiri);
-        //             $model->photo_kanan->saveAs($basePath . $filenameKanan);
-        //             $model->photo_dalam->saveAs($basePath . $filenameDalam);
-
-        //             $model->photo_depan = $filenameDepan;
-        //             $model->photo_belakang = $filenameBelakang;
-        //             $model->photo_kiri = $filenameKiri;
-        //             $model->photo_kanan = $filenameKanan;
-        //             $model->photo_dalam = $filenameDalam;
-        //         }
-
-        //         $model->save(false);
-
-        //         return $this->redirect(['view', 'id_pasar' => $model->id_pasar]);
-        //     }
-        // }
+     
 
         return $this->render('update', [
             'model' => $model,

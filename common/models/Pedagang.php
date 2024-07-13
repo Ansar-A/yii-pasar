@@ -36,14 +36,15 @@ class Pedagang extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_pedangang', 'nik', 'alamat', 'tempat_jualan', 'jenis_jualan', 'omset_perbulan', 'keterangan', 'photo', 'get_pasar'], 'required'],
+            [['nama_pedangang', 'nik', 'alamat', 'tempat_jualan', 'jenis_jualan', 'omset_perbulan', 'keterangan', 'get_pasar'], 'required'],
             [['tempat_jualan'], 'string'],
             [['omset_perbulan'], 'number'],
+            [['id_pedagang'], 'integer'],
             [['get_pasar'], 'integer'],
             [['nama_pedangang', 'jenis_jualan'], 'string', 'max' => 100],
             [['nik'], 'string', 'max' => 16],
             [['alamat', 'keterangan'], 'string', 'max' => 255],
-            [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
+            // [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
             [['get_pasar'], 'exist', 'skipOnError' => true, 'targetClass' => Pasar::class, 'targetAttribute' => ['get_pasar' => 'id_pasar']],
         ];
     }
@@ -62,7 +63,7 @@ class Pedagang extends \yii\db\ActiveRecord
             'jenis_jualan' => 'Jenis Jualan',
             'omset_perbulan' => 'Omset Perbulan',
             'keterangan' => 'Keterangan',
-            'photo' => 'Photo',
+           
             'get_pasar' => 'Get Pasar',
         ];
     }
